@@ -1,0 +1,65 @@
+[
+  {
+    "carritos": [
+      {
+        "id": 1,
+        "timestamp": "11/14/2021, 11:41:16 AM",
+        "productos": [
+          {
+            "nombre": "Arroz costeño",
+            "descripcion": "Arroz Extra COSTEÑO Bolsa 750g",
+            "codigo": "433778",
+            "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            "precio": 4.09,
+            "stock": 5,
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "timestamp": "11/14/2021, 10:20:18 PM",
+        "productos": [
+          {
+            "nombre": "VALLENORTE",
+            "descripcion": "Arroz Extra VALLENORTE Bolsa 750g",
+            "codigo": "997997",
+            "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            "precio": 3.7,
+            "stock": 1,
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "timestamp": "11/14/2021, 10:27:17 PM",
+        "productos": []
+      }
+    ]
+  },
+  {
+    "productos": [
+      {
+        "id": 1,
+        "timestamp": "11/14/2021, 8:55:46 PM",
+        "nombre": "VALLENORTE",
+        "descripcion": "Arroz Extra VALLENORTE Bolsa 750g",
+        "codigo": "997997",
+        "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        "precio": 5.7,
+        "stock": 1
+      },
+      {
+        "nombre": "Arroz costeño",
+        "descripcion": "Arroz Extra COSTEÑO Bolsa 5Kg",
+        "codigo": "641425",
+        "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        "precio": 22.29,
+        "stock": 20,
+        "timestamp": "11/14/2021, 10:00:37 PM",
+        "id": 3
+      }
+    ]
+  }
+]
