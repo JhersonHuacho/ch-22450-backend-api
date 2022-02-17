@@ -1,7 +1,15 @@
 import mongoose from 'mongoose';
 import { config } from '../config';
 
-mongoose.connect(config.mongodb.cnxStr, config.mongodb.options);
+mongoose.connect(config.mongodb.cnxStrAtlas, config.mongodb.options);
+
+mongoose.connection.on('open', () => {
+  console.log('Base de datos conectada con exito');
+});
+
+mongoose.connection.on('error', () => {
+  console.log('Error al conectarse!');
+})
 
 class ContenedorMongoDB {
 
@@ -20,7 +28,7 @@ class ContenedorMongoDB {
       if (documents.length === 0) {
         throw new Error('Error al listar por id: no encontrado')
       } else {
-        return documents;
+        return documents[0];
       }
     } catch (error) {
       console.log('error', error)

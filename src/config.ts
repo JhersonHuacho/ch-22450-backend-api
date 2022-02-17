@@ -3,7 +3,8 @@ export const config = {
     path: './DB'
   },
   mongodb: {
-    cnxStr: 'mongodb://127.0.0.1:27017/ecommerce',
+    cnxStrLocal: 'mongodb://127.0.0.1:27017/ecommerce',
+    cnxStrAtlas: 'mongodb+srv://fhuacho:fhuacho123@cluster0.n8bnc.mongodb.net/ecommerce?retryWrites=true&w=majority',
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,

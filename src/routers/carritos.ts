@@ -1,47 +1,111 @@
 import { Request, Response, Router } from 'express';
-// import ContenedorCarrito from '../utilitario/Carrito';
-import { carritosDao as carritosApi, productosDao as productosApi } from '../daos/index';
+import ContenedorCarrito from '../utilitario/Carrito';
 const router = Router();
-// const objCarrito = new ContenedorCarrito('db');
+const objCarrito = new ContenedorCarrito('db');
 
-// Router de carritos
-router.get('/', async (req: Request, res: Response) => {
-  // res.json((await carritosApi.getAll()).map((c: any) => c.id));
-  res.json(await carritosApi.getAll());
+
+router.get('/:id/productos', async (req: Request, res: Response) => {
+  const id = req.params.id === undefined ? -1 : parseInt(req.params.id);
+  const response = await objCarrito.getProductosPorCarrito(id);
+
+  if (response.status === 1) {
+    res.json({
+      message: response.message,
+      data: response.dataProducts,
+      status: 'OK'
+    });
+  } else  {
+    res.json({
+      message: response.message,
+      data: [],
+      status: response.status === -1 ? 'Validación' : 'ERROR'
+    });
+  }
 });
 
 router.post('/', async (req: Request, res: Response) => {
-  res.json(await carritosApi.save(req.body))
-});
+  const response = await objCarrito.saveCarrito();
 
-router.delete('/:id', async (req: Request, res: Response) => {
-  res.json(await carritosApi.deleteById(req.params.id))
-});
-
-// Router de productos en carrito
-router.get('/:id/productos', async (req: Request, res: Response) => {
-  const carrito = await carritosApi.getById(req.params.id);
-  console.log('get => /:id/productos => carrito', carrito)
-  console.log('get => /:id/productos => carrito', JSON.stringify(carrito.productos))
-  // res.json(JSON.stringify(carrito.productos));
-  res.json(carrito[0].productos);
+  if (response.status === 1)
+  {
+    res.json({
+      message: response.message,
+      data: {
+        idCarrito: response.dataCarritoId
+      },
+      status: 'OK'
+    });
+  } else {
+    res.json({
+      message: response.message,
+      data: {
+        idCarrito: response.dataCarritoId
+      },
+      status: 'OK'
+    });
+  }
+  
 });
 
 router.post('/:id/productos', async (req: Request, res: Response) => {
-  const carrito = await carritosApi.getById(req.params.id)
-  const producto = await productosApi.getById(req.body.id)
-  carrito.productos.push(producto)
-  await carritosApi.update(carrito)
-  res.end()
+  const idCarrito = req.params.id === undefined ? -1 : parseInt(req.params.id);
+  const response = await objCarrito.saveProductoAlCarrito(idCarrito, req.body);
+
+  if (response.status === 1) {
+    res.json({
+      message: response.message,
+      data: response.dataProduct,
+      status: 'OK'
+    });
+  } else {
+    res.json({
+      message: response.message,
+      data: [],
+      status: 'ERROR'
+    });
+  }
+});
+
+router.delete('/:id', async (req: Request, res: Response) => {
+  const idCarrito = req.params.id === undefined ? -1 : parseInt(req.params.id);
+
+  const response = await objCarrito.deleteCarritoPorId(idCarrito);
+
+  if (response.status === 1) {
+    res.json({
+        message: response.message,
+        data: [],
+        status: 'OK'
+    });
+  } else {
+    res.json({
+      message: response.message,
+      data: [],
+      status: 'ERROR'
+    });
+  }
+  
 });
 
 router.delete('/:id/productos/:id_prod', async (req: Request, res: Response) => {
-  const carrito = await carritosApi.getById(req.params.id)
-  const index = carrito.productos.findIndex((p: any) => p.id == req.params.id_prod)
-  if (index != -1) {
-      carrito.productos.splice(index, 1)
-      await carritosApi.update(carrito)
+  const idCarrito = req.params.id === undefined ? -1 : parseInt(req.params.id);
+  const idProducto = req.params.id_prod === undefined ? -1 : parseInt(req.params.id_prod);
+  const response = await objCarrito.deleteProductoDelCarrito(idCarrito, idProducto);
+
+  if (response.status === 1) {
+    res.json({
+      message: response.message,
+      data: [],
+      status: 'OK'
+    });
+  } else {
+    res.json({
+      message: response.message,
+      data: [],
+      status: 'ERROR'
+    });
   }
-  res.end()
+  
 });
+
 export default router;

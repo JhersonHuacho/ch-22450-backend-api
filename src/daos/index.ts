@@ -1,5 +1,8 @@
+
 let productosDao: any;
 let carritosDao: any;
+let usuariosDao: any ;
+
 let PERS: string = 'mongodb';
 // switch (process.env.PERS) {
 switch (PERS) {
@@ -46,6 +49,12 @@ switch (PERS) {
         const { default: CarritosDaoMongoDb } = moduleObject;
         carritosDao = new CarritosDaoMongoDb();
       })
+
+    import('./usuarios/UsuariosDaoMongoDB')
+      .then(moduleObject => {
+        const { default: UsuariosDaoMongoDB } = moduleObject;
+        usuariosDao = new UsuariosDaoMongoDB();
+      })
     break;
   case 'firebase':
     // const { default: ProductosDaoFirebase } = await import('./productos/ProductosDaoFirebase.js')
@@ -72,5 +81,6 @@ switch (PERS) {
 
 export {
   productosDao,
-  carritosDao
+  carritosDao,
+  usuariosDao
 }

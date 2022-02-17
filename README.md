@@ -37,3 +37,11 @@ npm run dev-js
 Como usar Typescript con NodeJS:
 https://www.section.io/engineering-education/how-to-use-typescript-with-nodejs/
 https://dev.to/roycechua/setup-a-node-express-api-with-typescript-2021-11o1
+
+Mongoose:
+https://github.com/Automattic/mongoose/issues/10632
+https://mongoosejs.com/docs/migrating_to_6.html#no-more-deprecation-warning-options
+
+Errores Solucionados:
+https://stackoverflow.com/questions/48481433/typescript-does-not-load-handlebar-files
+https://stackoverflow.com/questions/59708405/css-not-rendered-on-all-routes-with-express-handlebars
