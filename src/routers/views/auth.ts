@@ -1,10 +1,10 @@
 import { Request, Response, Router } from 'express';
-import { usuariosDao as usuariosApi } from '../daos/index';
+import { usuariosDao as usuariosApi } from '../../daos/index';
 // passport
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 // util
-import { createHash, isValidPassword } from '../utilitario/encrypt';
+import { createHash, isValidPassword } from '../../utilitario/encrypt';
 // email
 import { createTransport } from 'nodemailer'
 
@@ -118,7 +118,7 @@ passport.deserializeUser(async (id, done) => {
 
 router.post('/login', 
   passport.authenticate('local-login', {
-    successRedirect: '/api/productos',
+    successRedirect: '/productos',
     failureRedirect: '/auth/faillogin'
   })
 )

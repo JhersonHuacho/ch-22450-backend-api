@@ -13,25 +13,31 @@ o
 ```bash
 npm run dev-js
 ```
-#### Rutas:
+#### Rutas API:
 ##### Productos
-- GET: /api/productos
-- GET: /api/productos/2
-- POST: /api/productos
-- PUT: /api/productos
-- DEL: /api/productos/2
+- GET: `/api/productos`
+- GET: ``/api/productos/2``
+- POST: ``/api/productos``
+- PUT: ``/api/productos``
+- DEL: ``/api/productos/2``
 
-- POST: /api/productos?admin=true
-- PUT: /api/productos?admin=true
-- DEL: /api/productos/2?admin=true
+- POST: ``/api/productos?admin=true``
+- PUT: ``/api/productos?admin=true``
+- DEL: ``/api/productos/2?admin=true``
 ##### Carrito
 
-- GET: /api/carrito/1/productos
-- POST: /api/carrito
-- DEL: /api/carrito/1/productos/2
-- DEL: /api/carrito/4
-- POST: /api/carrito/2/productos
+- GET: ``/api/carrito/1/productos``
+- POST: ``/api/carrito``
+- DEL: ``/api/carrito/1/productos/2``
+- DEL: ``/api/carrito/4``
+- POST: ``/api/carrito/2/productos``
 
+#### Rutas para la vista:
+
+##### Auth
+- Inicio - Login: `http://localhost:8080/auth/login`
+- Registro: `http://localhost:8080/auth/register`
+- Productos - Solo si estas logueado: `http://localhost:8080/productos`
 #### Recursos utilizados
 
 Como usar Typescript con NodeJS:
