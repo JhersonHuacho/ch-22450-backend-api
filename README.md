@@ -13,24 +13,32 @@ o
 ```bash
 npm run dev-js
 ```
+#### Publicado:
+``https://evening-cove-60783.herokuapp.com/api/auth/test``
+
 #### Rutas API:
+##### Auth
+- GET: `/api/auth/test`
+- POST: ``/api/auth/login``
+- POST: ``/api/auth/register``
+- GET: ``/api/auth/logout``
 ##### Productos
 - GET: `/api/productos`
-- GET: ``/api/productos/2``
+- GET: ``/api/productos/621458711c7d6ad1b803fb3d``
 - POST: ``/api/productos``
 - PUT: ``/api/productos``
-- DEL: ``/api/productos/2``
+- DEL: ``/api/productos/621458711c7d6ad1b803fb3d``
 
 - POST: ``/api/productos?admin=true``
 - PUT: ``/api/productos?admin=true``
-- DEL: ``/api/productos/2?admin=true``
+- DEL: ``/api/productos/621458711c7d6ad1b803fb3d?admin=true``
 ##### Carrito
 
-- GET: ``/api/carrito/1/productos``
+- GET: ``/api/carrito/62145cb700886ea3eedb64c1/productos``
 - POST: ``/api/carrito``
-- DEL: ``/api/carrito/1/productos/2``
-- DEL: ``/api/carrito/4``
-- POST: ``/api/carrito/2/productos``
+- DEL: ``/api/carrito/62145cb700886ea3eedb64c1/productos/621458711c7d6ad1b803fb3d``
+- DEL: ``/api/carrito/62145cb700886ea3eedb64c1``
+- POST: ``/api/carrito/62145cb700886ea3eedb64c1/productos``
 
 #### Rutas para la vista:
 
