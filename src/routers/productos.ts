@@ -1,51 +1,40 @@
 import { Request, Response, Router } from 'express';
-import ContenedorProducto from '../utilitario/Producto';
+// import ContenedorProducto from '../utilitario/Producto';
 // const Contenedor = require('../utilitario/fileSystem.ts');
+import { productosDao as productosApi } from '../daos/index';
 
 const router = Router();
-const objProducts = new ContenedorProducto('db');
+// const objProducts = new ContenedorProducto('db');
 // const administrador: boolean;
 
 router.get('/:id?', async (req: Request, res: Response) => {
-  const id: number = req.params.id === undefined ? -1 : parseInt(req.params.id);
-  // console.log('params', req.params);
-  // console.log('params id', id);
+  if (!req.isAuthenticated()) {
+    console.log('Usuario no esta autenticado')
+    res.json({
+      message: "Usuario no esta autenticado.",
+      data: [],
+      status: 'Validación'
+    });
+    return;
+  }
+  const id: number | string = req.params.id === undefined ? -1 : req.params.id;
   if (id === -1) {
-    const response = await objProducts.getAll();
-
-    if (response.status === 1) {
-      res.json({
-        message: response.message,
-        data: response.dataProducts,
-        status: 'OK'
-      });
-    } else {
-      res.json({
-        message: response.message,
-        data: [],
-        status: response.status === -1 ? 'Validación' : 'ERROR'
-      });
-    }
+    const response = await productosApi.getAll();
+    res.json({
+      message: "OK",
+      data: response,
+      status: 'OK'
+    });
 
   } else {
-
-    const response = await objProducts.getById(id);
-
-    if (response.status === 1) {
-      res.json({
-        message: response.message,
-        data: response.dataProduct,
-        status: 'OK'
-      });
-    } else {
-      res.json({
-        message: response.message,
-        data: [],
-        status: response.status === -1 ? 'Validación' : 'ERROR'
-      });
-    }
+    const response = await productosApi.getById(id);
+   
+    res.json({
+      message: "Ok",
+      data: response,
+      status: 'OK'
+    });
   }
-  
 });
 
 router.post('/', async (req:Request, res: Response) => {
@@ -57,21 +46,14 @@ router.post('/', async (req:Request, res: Response) => {
     : objQuery.admin === 'true' ? true : false;
 
   if (isAdmin) {
-    const response = await objProducts.save(req.body);
+    const response = await productosApi.save(req.body);
 
-    if (response.status === 1) {
-      res.json({
-        message: response.message,
-        data: response.dataProduct,
-        status: 'OK'
-      });
-    } else {
-      res.json({
-        message: response.message,
-        data: [],
-        status: response.status === -1 ? 'Validación' : 'ERROR'
-      });
-    }
+    res.json({
+      message: "OK",
+      data: response,
+      status: 'OK'
+    });
+    
   } else {
     res.json({
       error: -1,
@@ -90,22 +72,14 @@ router.put('/:id', async (req: Request, res: Response) => {
   if (isAdmin) {
     const id = req.params.id === undefined ? -1 : parseInt(req.params.id);
     const body = req.body;
-    const response = await objProducts.updateById(body, id);
+    const response = await productosApi.updateById(body, id);
   
-  
-    if (response.status === 1) {
-      res.json({
-        message: 'put => Acceso administrador',
-        data: response.dataProduct,
-        status: 'OK'
-      });
-    } else {
-      res.json({
-        message: 'put => Acceso administrador',
-        data: [],
-        status: 'ERROR'
-      });
-    }
+    res.json({
+      message: 'put => Acceso administrador',
+      data: response,
+      status: 'OK'
+    });
+   
   } else {
     res.json({
       error: -1,
@@ -122,21 +96,14 @@ router.delete('/:id', async (req: Request, res: Response) => {
   
   if (isAdmin) {
     const id = req.params.id === undefined ? -1 : parseInt(req.params.id);
-    const response = await objProducts.deleteById(id);
+    const response = await productosApi.deleteById(id);
   
-    if (response.status === 1) {
-      res.json({
-        message: response.message,
-        data: {},
-        status: 'OK'
-      });
-    } else {
-      res.json({
-        message: response.message,
-        data: {},
-        status: 'ERROR'
-      });
-    }
+    res.json({
+      message: "Delete Product OK",
+      data: response,
+      status: 'OK'
+    });
+   
   } else {
     res.json({
       error: -1,

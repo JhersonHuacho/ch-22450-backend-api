@@ -19,7 +19,7 @@ import authRouters from './routers/auth';
 dotenv.config();
 
 const app: Application = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3001;
 
 app.use(cors());
 app.use('/static', express.static(path.join(__dirname,"/public")));

@@ -1,7 +1,7 @@
 GET http://localhost:3001/api/productos
 
 ###
-GET http://localhost:3001/api/productos/61b75e427ab64d6edde644d3
+GET http://localhost:3001/api/productos/621458711c7d6ad1b803fb3d
 
 ###
 
@@ -33,6 +33,17 @@ Content-Type: application/json
 {
   "name": "Leche Gloria Light 400g",
   "price": 3.50,
+  "thumbnail": ""
+}
+
+###
+
+POST http://localhost:3001/api/productos?admin=true
+Content-Type: application/json
+
+{
+  "name": "Aceite Soya 1L",
+  "price": 5.50,
   "thumbnail": ""
 }
 

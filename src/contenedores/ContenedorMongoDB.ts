@@ -19,7 +19,7 @@ class ContenedorMongoDB {
     this._collection = mongoose.model(nameCollection, schema);
   }
 
-  async getById(id: number) {
+  async getById(id: number | string) {
     try {
       console.log("ContenedorMongoDB => getById  => id", id);
       const documents = await this._collection.find({ _id: id.toString() });
@@ -57,9 +57,9 @@ class ContenedorMongoDB {
     }
   }
 
-  async update(objUpdate: any) {
+  async update(objUpdate: any, id: number) {
     try {
-      let { n, nModified } = await this._collection.replaceOne({ '_id': objUpdate._id }, objUpdate);
+      let { n, nModified } = await this._collection.replaceOne({ '_id': id }, objUpdate);
       if (n == 0 || nModified == 0) {
         throw new Error('Error al actualizar: no encontrado')
       } else {
@@ -71,9 +71,34 @@ class ContenedorMongoDB {
     }
   }
 
-  async deleteById(id: number) {
+  async updateCarrito(objUpdate: any, id: number) {
+    try {
+      await this._collection.updateOne({ '_id': id }, { $push: { productos: objUpdate }});
+      // if (n == 0 || nModified == 0) {
+      //   throw new Error('Error al actualizar: no encontrado')
+      // } else {
+        return objUpdate;
+      // }
+    } catch (error) {
+      console.log('')
+      throw new Error(`Error al borrar: ${error}`)
+    }
+  }
+
+  async deleteById(id: number | string) {
     try {
       const documentDelete = await this._collection.findOneAndDelete({ _id: id });
+      return documentDelete;
+
+    } catch (error) {
+      throw new Error(`Error al borrar: ${error}`);
+    }
+  }
+
+  async deleteByIdByIdProduct(id: number, id_product: number) {
+    try {
+      // https://es.stackoverflow.com/questions/373017/como-eliminar-un-objeto-de-una-colecci%C3%B3n-por-su-id-en-mongodb
+      const documentDelete = await this._collection.updateOne({ _id: id }, { $pull: { productos: { _id: id_product } } });
       return documentDelete;
 
     } catch (error) {

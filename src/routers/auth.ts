@@ -119,7 +119,7 @@ passport.deserializeUser(async (id, done) => {
 router.post('/login', 
   passport.authenticate('local-login', {
     successRedirect: '/api/productos',
-    failureRedirect: '/auth/faillogin'
+    failureRedirect: '/api/auth/faillogin'
   })
 )
 
@@ -141,9 +141,19 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/faillogin', (req, res) => {
-  res.render('faillogin', {
-    layout: 'index'
-  })
+  res.json({
+    message: "Usuario no tiene las credenciales correctas.",
+    data: [],
+    status: 'Validación'
+  });
+});
+
+router.get('/test', (req, res) => {
+  res.json({
+    message: "Api OK.",
+    data: [],
+    status: 'Validación'
+  });
 });
 
 router.get('/logout', (req: any, res: Response) => {

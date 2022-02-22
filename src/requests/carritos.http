@@ -11,7 +11,8 @@ Content-Type: application/json
 {
   "productos": [
     {
-      "name": "Leche Gloria Evaporada azul 400g",
+      "_id": "621458711c7d6ad1b803fb3d",
+      "name": "Leche Gloria Light 400g",
       "price": 3.50,
       "thumbnail": ""
     }
@@ -26,8 +27,9 @@ Content-Type: application/json
 {
   "productos": [
     {
-      "name": "Leche Gloria Evaporada azul 400g",
-      "price": 3.50,
+      "_id": "621458ae1c7d6ad1b803fb41",
+      "name": "Aceite Soya 1L",
+      "price": 5.50,
       "thumbnail": ""
     }
   ]
@@ -35,7 +37,12 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3001/api/carrito/61b762db1bf5e426932d3415
+POST http://localhost:3001/api/carrito/62145cb700886ea3eedb64c1/comprar
+Content-Type: application/json
+
+###
+
+PUT http://localhost:3001/api/carrito/621458db1c7d6ad1b803fb45/productos
 Content-Type: application/json
 
 {
@@ -47,4 +54,4 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3001/api/carrito/61b75e7a7ab64d6edde644d8
+DELETE http://localhost:3001/api/carrito/621458db1c7d6ad1b803fb45
